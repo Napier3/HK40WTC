@@ -1,2 +1,11 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/hkui">
+        <file>icons/Background.png</file>
+        <file>icons/BlueTooth.png</file>
+        <file>icons/CTReport.png</file>
+        <file>icons/CTTest.png</file>
+        <file>icons/PTReport.png</file>
+        <file>icons/PTTest.png</file>
+        <file>icons/Setting.png</file>
+    </qresource>
+</RCC>

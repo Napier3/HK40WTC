@@ -1,7 +1,7 @@
-#ifndef CTTEST_H
-#define CTTEST_H
-
+#pragma once
 #include <QMainWindow>
+
+class QCustomPlot; // forward declaration
 
 namespace Ui {
 class CTTest;
@@ -16,15 +16,18 @@ public:
     ~CTTest();
 
     void ConnectSignals();
+
 protected:
-    // 1) Declare an override for paintEvent
     void paintEvent(QPaintEvent *event) override;
 
-public slots:
+private slots:
     void On_CloseButton_Clicked();
+
+    // Example: two slots to plot different graphs on m_plot:
+    void plotExcitationData();
+    void plot5PercentData();
+    void plot10PercentData();
 
 private:
     Ui::CTTest *ui;
 };
-
-#endif // CTTEST_H

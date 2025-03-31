@@ -37,16 +37,16 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="leftMargin">
-     <number>0</number>
+     <number>9</number>
     </property>
     <property name="topMargin">
-     <number>0</number>
+     <number>9</number>
     </property>
     <property name="rightMargin">
-     <number>0</number>
+     <number>9</number>
     </property>
     <property name="bottomMargin">
-     <number>0</number>
+     <number>9</number>
     </property>
     <item>
      <widget class="QFrame" name="frame">
@@ -57,7 +57,7 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
@@ -107,6 +107,13 @@
     </item>
     <item>
      <widget class="QFrame" name="frame_2">
+      <property name="styleSheet">
+       <string notr="true">QFrame#frame_2 {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}</string>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
@@ -191,8 +198,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>240</width>
-              <height>240</height>
+              <width>160</width>
+              <height>160</height>
              </size>
             </property>
            </widget>
@@ -213,7 +220,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>20</pointsize>
+              <pointsize>30</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -310,8 +317,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>240</width>
-              <height>240</height>
+              <width>160</width>
+              <height>160</height>
              </size>
             </property>
            </widget>
@@ -332,7 +339,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>20</pointsize>
+              <pointsize>30</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -429,8 +436,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>240</width>
-              <height>240</height>
+              <width>300</width>
+              <height>300</height>
              </size>
             </property>
            </widget>
@@ -451,7 +458,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>20</pointsize>
+              <pointsize>30</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -548,8 +555,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>240</width>
-              <height>240</height>
+              <width>160</width>
+              <height>160</height>
              </size>
             </property>
            </widget>
@@ -570,7 +577,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>20</pointsize>
+              <pointsize>30</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -667,8 +674,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>240</width>
-              <height>240</height>
+              <width>160</width>
+              <height>160</height>
              </size>
             </property>
            </widget>
@@ -689,7 +696,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>20</pointsize>
+              <pointsize>30</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -721,7 +728,7 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
@@ -742,6 +749,11 @@
        </item>
        <item>
         <widget class="QLabel" name="label_7">
+         <property name="font">
+          <font>
+           <pointsize>30</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>2022-06-06  11:08</string>
          </property>
@@ -752,17 +764,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1280</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

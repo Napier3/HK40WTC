@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,7 +15,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += $$PWD/SoftKeyboard
+INCLUDEPATH += \
+    $$PWD/SoftKeyboard \
+    $$PWD/Plot
 
 SOURCES += \
     SoftKeyboard/Keyboard/Keyboard.cpp \
@@ -37,6 +39,7 @@ SOURCES += \
     SoftKeyboard/Keyboard/googlepinyin/utf16char.cpp \
     SoftKeyboard/Keyboard/googlepinyin/utf16reader.cpp \
     SoftKeyboard/SoftKeyBoard.cpp \
+    Plot/qcustomplot.cpp\
     cttest.cpp \
     main.cpp \
     mainwindow.cpp
@@ -63,6 +66,7 @@ HEADERS += \
     SoftKeyboard/Keyboard/googlepinyin/userdict.h \
     SoftKeyboard/Keyboard/googlepinyin/utf16char.h \
     SoftKeyboard/Keyboard/googlepinyin/utf16reader.h \
+    Plot/qcustomplot.h \
     cttest.h \
     mainwindow.h
 
@@ -75,3 +79,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    hkui.qrc
