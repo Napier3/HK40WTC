@@ -1,5 +1,6 @@
 #include "SoftKeyBoard.h"
 #include "MathApi.h"
+#include<QDebug>
 
 QSoftKeyBoard* g_pSoftKeyBoard = nullptr;
 
@@ -109,7 +110,6 @@ void QSoftKeyBoard::ReAttachObj()
 void QSoftKeyBoard::Attach(QWidget* pWidget, Keyboard::tagMode oDefault, bool bStack)
 {
 	Release();
-
 	m_pKeyBoard = new Keyboard(pWidget,oDefault);
 	if(bStack)
 	{

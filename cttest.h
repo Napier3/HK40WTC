@@ -1,7 +1,8 @@
 #pragma once
 #include <QMainWindow>
+#include "qcustomplot.h"
 
-class QCustomPlot; // forward declaration
+class QCPTextElement; // forward declare
 
 namespace Ui {
 class CTTest;
@@ -23,11 +24,16 @@ protected:
 private slots:
     void On_CloseButton_Clicked();
 
-    // Example: two slots to plot different graphs on m_plot:
     void plotExcitationData();
     void plot5PercentData();
     void plot10PercentData();
 
 private:
+    // Our helper to customize the tab widget
+    void initTabWidget();
+    void initTableWidget(QTableWidget *table);
+
+private:
     Ui::CTTest *ui;
+    QCPTextElement *m_plotTitle = nullptr;
 };

@@ -1,7 +1,6 @@
 #include "cttest.h"
 #include "ui_cttest.h"
 #include "SoftKeyBoard.h"
-#include "qcustomplot.h"
 
 #include <QButtonGroup>
 #include <QPainter>
@@ -32,6 +31,12 @@ CTTest::CTTest(QWidget *parent)
 
     // We'll connect signals to stackedWidget pages & our new plot slots
     ConnectSignals();
+    ui->m_plot->plotLayout()->insertRow(0);
+    m_plotTitle = new QCPTextElement(ui->m_plot, "", QFont("SimHei", 14, QFont::Bold));
+    ui->m_plot->plotLayout()->addElement(0, 0, m_plotTitle);
+    initTabWidget();
+    initTableWidget(ui->tableWidget);
+    initTableWidget(ui->tableWidget_2);
 }
 
 CTTest::~CTTest()
@@ -68,13 +73,62 @@ void CTTest::ConnectSignals()
             this, &CTTest::plot10PercentData);
 }
 
-/* Àø´ÅÌØÐÔÇúÏß: use LOG scale on both X and Y, with sub-grid lines
+void CTTest::initTabWidget()
+{
+    // 1) Create a label for the corner
+    QLabel *cornerLabel = new QLabel(QStringLiteral("è¯•éªŒæ•°æ®"), this);
+    QFont cornerFont("SimHei", 12, QFont::Bold);
+    cornerLabel->setFont(cornerFont);
+
+    // 2) Place it in the top-left corner of the tabWidget
+    ui->tabWidget->setCornerWidget(cornerLabel, Qt::TopLeftCorner);
+
+    // 3) Align the tabs themselves on the right side
+    ui->tabWidget->setStyleSheet("QTabBar { alignment: right; }");
+
+    // If needed, ensure tabs are on top
+    ui->tabWidget->setTabPosition(QTabWidget::North);
+}
+
+void CTTest::initTableWidget(QTableWidget *table)
+{
+    // Example: 4 total rows (1 "header" row + 3 data rows),
+        //          7 columns
+    table->setRowCount(3);
+    table->setColumnCount(7);
+
+    // Hide the built-in headers
+    table->horizontalHeader()->setVisible(false);
+    table->verticalHeader()->setVisible(false);
+
+    // Let columns/rows stretch to fill the available space
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Fill row 0 with "header" text
+    table->setItem(0, 0, new QTableWidgetItem(QStringLiteral("VA")));
+    table->setItem(0, 1, new QTableWidgetItem(QStringLiteral("COSÏ†")));
+    table->setItem(0, 2, new QTableWidgetItem(QStringLiteral("1%")));
+    table->setItem(0, 3, new QTableWidgetItem(QStringLiteral("5%")));
+    table->setItem(0, 4, new QTableWidgetItem(QStringLiteral("20%")));
+    table->setItem(0, 5, new QTableWidgetItem(QStringLiteral("100%")));
+    table->setItem(0, 6, new QTableWidgetItem(QStringLiteral("120%")));
+    table->setSelectionBehavior(QAbstractItemView::SelectItems);
+    table->setSelectionMode(QAbstractItemView::SingleSelection);
+    table->setEditTriggers(QAbstractItemView::CurrentChanged | QAbstractItemView::SelectedClicked | QAbstractItemView::AnyKeyPressed | QAbstractItemView::EditKeyPressed);
+}
+
+/* åŠ±ç£ç‰¹æ€§æ›²çº¿: use LOG scale on both X and Y, with sub-grid lines
    We'll set a fixed range, e.g. x: 1e-4..10, y: 1e-2..100
    Then plot some example data. */
 void CTTest::plotExcitationData()
 {
     // Clear old data
     ui->m_plot->clearGraphs();
+    if (m_plotTitle)
+    {
+        m_plotTitle->setText(QString::fromLocal8Bit("åŠ±ç£ç‰¹æ€§æ›²çº¿"));
+    }
 
     // Set up log scale for xAxis
     ui->m_plot->xAxis->setScaleType(QCPAxis::stLogarithmic);
@@ -97,7 +151,7 @@ void CTTest::plotExcitationData()
 
     // Add a graph
     ui->m_plot->addGraph();
-    ui->m_plot->graph(0)->setName(QString::fromLocal8Bit("Àø´ÅÌØÐÔ"));
+    ui->m_plot->graph(0)->setName(QString::fromLocal8Bit("åŠ±ç£ç‰¹æ€§"));
     ui->m_plot->graph(0)->setLineStyle(QCPGraph::lsLine);
     // optionally set a scatter style
     // ui->m_plot->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
@@ -119,12 +173,16 @@ void CTTest::plotExcitationData()
     ui->m_plot->replot();
 }
 
-/* 5%Îó²îÇúÏß: linear scale, fixed range x: 0..210, y: 0..44
+/* 5%è¯¯å·®æ›²çº¿: linear scale, fixed range x: 0..210, y: 0..44
    We'll put sub-grid lines so you get many horizontal/vertical lines. */
 void CTTest::plot5PercentData()
 {
     // Clear old data/graphs:
     ui->m_plot->clearGraphs();
+    if (m_plotTitle)
+    {
+        m_plotTitle->setText(QString::fromLocal8Bit("5%è¯¯å·®æ›²çº¿"));
+    }
 
     // 1) Set linear scales:
     ui->m_plot->xAxis->setScaleType(QCPAxis::stLinear);
@@ -154,8 +212,8 @@ void CTTest::plot5PercentData()
     }
 
     // 5) Set axis labels:
-    ui->m_plot->xAxis->setLabel(QString::fromLocal8Bit("Z(¦¸)"));
-    ui->m_plot->yAxis->setLabel(QString::fromLocal8Bit("kalf (±¶)"));
+    ui->m_plot->xAxis->setLabel(QString::fromLocal8Bit("Z(Î©)"));
+    ui->m_plot->yAxis->setLabel(QString::fromLocal8Bit("kalf (å€)"));
 
     // 6) Make the grid lines dashed:
     QPen gridPen(Qt::gray, 1, Qt::DotLine);
@@ -169,7 +227,7 @@ void CTTest::plot5PercentData()
 
     // 8) Add a graph (line or scatter)
     ui->m_plot->addGraph();
-    ui->m_plot->graph(0)->setName("¶î¶¨¸ººÉ");
+    ui->m_plot->graph(0)->setName("é¢å®šè´Ÿè·");
     ui->m_plot->graph(0)->setLineStyle(QCPGraph::lsLine);
     // If you want scatter:
     // ui->m_plot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 4));
@@ -195,6 +253,10 @@ void CTTest::plot10PercentData()
 {
     // Clear old data/graphs:
     ui->m_plot->clearGraphs();
+    if (m_plotTitle)
+    {
+        m_plotTitle->setText(QString::fromLocal8Bit("10%è¯¯å·®æ›²çº¿"));
+    }
 
     // 1) Set linear scales:
     ui->m_plot->xAxis->setScaleType(QCPAxis::stLinear);
@@ -224,8 +286,13 @@ void CTTest::plot10PercentData()
     }
 
     // 5) Set axis labels:
-    ui->m_plot->xAxis->setLabel(QString::fromLocal8Bit("Z(¦¸)"));
-    ui->m_plot->yAxis->setLabel(QString::fromLocal8Bit("kalf (±¶)"));
+    QFont axisFont(QStringLiteral("Microsoft YaHei"), 12);
+    ui->m_plot->xAxis->setLabelFont(axisFont);
+    ui->m_plot->yAxis->setLabelFont(axisFont);
+
+    // If your .cpp is UTF-8, this is safe:
+    ui->m_plot->xAxis->setLabel(QString::fromLocal8Bit("Z(Î©)"));
+    ui->m_plot->yAxis->setLabel(QString::fromLocal8Bit("kalf(å€)"));
 
     // 6) Make the grid lines dashed:
     QPen gridPen(Qt::gray, 1, Qt::DotLine);
@@ -239,7 +306,7 @@ void CTTest::plot10PercentData()
 
     // 8) Add a graph (line or scatter)
     ui->m_plot->addGraph();
-    ui->m_plot->graph(0)->setName("¶î¶¨¸ººÉ");
+    ui->m_plot->graph(0)->setName("é¢å®šè´Ÿè·");
     ui->m_plot->graph(0)->setLineStyle(QCPGraph::lsLine);
     // If you want scatter:
     // ui->m_plot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 4));
