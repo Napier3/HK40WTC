@@ -34,7 +34,6 @@ CTTest::CTTest(QWidget *parent)
     ui->m_plot->plotLayout()->insertRow(0);
     m_plotTitle = new QCPTextElement(ui->m_plot, "", QFont("SimHei", 14, QFont::Bold));
     ui->m_plot->plotLayout()->addElement(0, 0, m_plotTitle);
-    initTabWidget();
     initTableWidget(ui->tableWidget);
     initTableWidget(ui->tableWidget_2);
 }
@@ -71,23 +70,6 @@ void CTTest::ConnectSignals()
             this, &CTTest::plot5PercentData);
     connect(ui->m_buttonTenDev, &QPushButton::clicked,
             this, &CTTest::plot10PercentData);
-}
-
-void CTTest::initTabWidget()
-{
-    // 1) Create a label for the corner
-    QLabel *cornerLabel = new QLabel(QStringLiteral("试验数据"), this);
-    QFont cornerFont("SimHei", 12, QFont::Bold);
-    cornerLabel->setFont(cornerFont);
-
-    // 2) Place it in the top-left corner of the tabWidget
-    ui->tabWidget->setCornerWidget(cornerLabel, Qt::TopLeftCorner);
-
-    // 3) Align the tabs themselves on the right side
-    ui->tabWidget->setStyleSheet("QTabBar { alignment: right; }");
-
-    // If needed, ensure tabs are on top
-    ui->tabWidget->setTabPosition(QTabWidget::North);
 }
 
 void CTTest::initTableWidget(QTableWidget *table)

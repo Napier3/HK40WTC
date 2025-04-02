@@ -29,8 +29,6 @@ private slots:
     void plot10PercentData();
 
 private:
-    // Our helper to customize the tab widget
-    void initTabWidget();
     void initTableWidget(QTableWidget *table);
 
 private:
