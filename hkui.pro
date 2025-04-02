@@ -41,7 +41,6 @@ SOURCES += \
     SoftKeyboard/SoftKeyBoard.cpp \
     Plot/qcustomplot.cpp\
     cttest.cpp \
-    hkspinbox.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -69,7 +68,6 @@ HEADERS += \
     SoftKeyboard/Keyboard/googlepinyin/utf16reader.h \
     Plot/qcustomplot.h \
     cttest.h \
-    hkspinbox.h \
     mainwindow.h
 
 FORMS += \
